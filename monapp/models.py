@@ -13,6 +13,13 @@ class Category(models.Model):
     parent = models.ForeignKey('Category', null=True, blank=True,
         on_delete=models.SET_NULL, related_name='subcategories')
 
+    class Meta:
+        verbose_name_plural = "categories"
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.id} : {self.name}" 
+
 
 class Product(models.Model):
     name = models.CharField(max_length=30, null=False, blank=False, 
@@ -27,6 +34,12 @@ class Product(models.Model):
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, 
         null=True, related_name='products')
 
+    class Meta:
+        ordering = ['-created_at']
+
+    def __str__(self):
+        return f"{self.id} : {self.name}" 
+
 
 class Image(models.Model):
     name = models.CharField(max_length=30, null=False, blank=False)
@@ -35,3 +48,5 @@ class Image(models.Model):
     product = models.ForeignKey('Product', on_delete=models.CASCADE, 
         related_name='images')
 
+    def __str__(self):
+        return f"{self.id} : {self.name} of {self.product.name}"
