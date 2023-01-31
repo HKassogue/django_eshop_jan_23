@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.apps import apps
 from .models import *
 
-admin.site.register(Product)
 admin.site.register(Image)
 
 @admin.register(Category)
@@ -13,6 +12,11 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',), }
     autocomplete_fields = ['parent']
 
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'category', 'stock', 'price']
+    prepopulated_fields = {'slug': ('name',), }
+    autocomplete_fields = ['category']
 
 # admin.site.register(Alerts)
 # admin.site.register(Faqs)

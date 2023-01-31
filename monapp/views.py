@@ -1,9 +1,14 @@
 from django.shortcuts import render
-from .models import Category
+from .models import Category, Product
 
 def index(request):
     categories = Category.objects.all()
-    return render(request, 'monapp/index.html', {'categories': categories})
+    products = Product.objects.filter(active=True)
+    context = {
+        'categories': categories, 
+        'products': products,
+    }
+    return render(request, 'monapp/index.html', context)
 
 def cart(request):
     return render(request, 'monapp/cart.html')

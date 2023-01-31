@@ -41,6 +41,17 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.id} : {self.name}" 
+    
+    @property
+    def first_image(self):
+        images = self.images.all()
+        if images:
+            return images[0].file.url
+        return ''
+
+    @property
+    def fake_promo(self):
+        return self.price * 1.1
 
 
 class Image(models.Model):
