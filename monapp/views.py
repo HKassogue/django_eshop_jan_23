@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from .models import Category
 
 def index(request):
-    return render(request, 'monapp/index.html')
+    categories = Category.objects.all()
+    return render(request, 'monapp/index.html', {'categories': categories})
 
 def cart(request):
     return render(request, 'monapp/cart.html')
