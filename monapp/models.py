@@ -13,6 +13,7 @@ class Category(models.Model):
         auto_now=True)
     parent = models.ForeignKey('Category', null=True, blank=True,
         on_delete=models.SET_NULL, related_name='subcategories')
+    photo = models.ImageField(upload_to="images/categories", null=True, blank=True)
 
     class Meta:
         verbose_name_plural = "categories"
